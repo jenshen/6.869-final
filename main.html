@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<head>
+	<link href="video-js-5.3.0/video-js.css" rel="stylesheet">
+	<link href="thumbnail-slider/flexslider.css" rel="stylesheet">
+	<script src="video-js-5.3.0/video.js"></script>
+	<script src="js/jquery-2.1.0.js"></script>
+	<script src="js/VideoFrame.min.js"></script>
+	<script src="js/main.js"></script>
+	<script src="thumbnail-slider/jquery.flexslider-min.js"></script>
+</head>
+
+<body style="background-color:black"> 
+	
+    <div class="flexslider" style="width:640px">
+    	<ul class="slides"></ul>
+    </div>
+
+    <div class="frame">  
+		<span id="currentFrame" style="color:white">0</span>
+	</div>
+
+	<div class="frame">  
+		<span id="clickedFrame" style="color:white">Frame sent: 0</span>
+	</div>
+
+	<div>
+		<button id="id_faces">ID</button>
+	</div>
+
+    <canvas id="canvas" width="640" height="264" style="position:absolute; top: 10; left: 10; z-index:5" ></canvas>
+
+	<div>
+	<video id="my-video" class="video-js" controls preload="auto" width="640" height="264" data-setup="{}">
+		<source src="http://www.w3schools.com/html/mov_bbb.mp4"></source>
+	</video> 
+	</div>  	
+</body>
+</html>
+
+
+
+
