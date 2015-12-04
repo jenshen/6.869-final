@@ -1,0 +1,25 @@
+html, body {
+	/*overflow: 'hidden';
+    height': 100%;*/
+}
+.main {
+	display: block;
+	width: 80%;
+	margin: 0 auto;
+}
+
+.video-player {
+	display: block;
+	width: 100%;
+	/*height: 100%;*/
+	padding: 20px 0 50px; /* Account for video controls space */
+}
+
+video {
+	width: 100%;
+    height: auto;
+}
+
+.slider {
+	margin: 20px 0;
+}

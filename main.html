@@ -1,17 +1,22 @@
 <!DOCTYPE html>
+<html>
+
 <head>
-	<link href="video-js-5.3.0/video-js.css" rel="stylesheet">
-	<link href="thumbnail-slider/flexslider.css" rel="stylesheet">
-	<script src="video-js-5.3.0/video.js"></script>
-	<script src="js/jquery-2.1.0.js"></script>
-	<script src="js/VideoFrame.min.js"></script>
-	<script src="js/main.js"></script>
-	<script src="thumbnail-slider/jquery.flexslider-min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link href="ext/video-js-5.3.0/video-js.css" rel="stylesheet">
+	<link href="ext/thumbnail-slider/flexslider.css" rel="stylesheet">
+	<link href="ext/main.css" rel="stylesheet">
+	<link href="ext/cover.css" rel="stylesheet">
 </head>
 
-<body style="background-color:black"> 
-	
-    <div class="flexslider" style="width:640px">
+<!-- <body> 
+
+
+
+<div class="main">
+
+
+	<div class="flexslider" style="width:640px">
     	<ul class="slides"></ul>
     </div>
 
@@ -27,13 +32,52 @@
 		<button id="id_faces">ID</button>
 	</div>
 
-    <canvas id="canvas" width="640" height="264" style="position:absolute; top: 10; left: 10; z-index:5" ></canvas>
+    
+</div>
 
-	<div>
-	<video id="my-video" class="video-js" controls preload="auto" width="640" height="264" data-setup="{}">
-		<source src="http://www.w3schools.com/html/mov_bbb.mp4"></source>
-	</video> 
-	</div>  	
+</body> -->
+
+<body>
+
+<div class="site-wrapper">
+<div class="cover-container">
+
+<div class="row">
+	<canvas id="canvas" style="position:absolute; top: 10; left: 10; z-index:5" ></canvas>
+
+	<div class="video-player">
+		<video id="my-video" class="video-js container" height="550" controls preload="auto" data-setup="{}">
+			<source src="http://www.w3schools.com/html/mov_bbb.mp4"></source>
+		</video> 
+	</div>
+</div>
+
+<div class="slider row">
+	<div class="col-md-2"></div>
+	<div class="flexslider col-md-8"> <ul class="slides"></ul> </div>
+	<div class="col-md-2"></div>
+</div>
+
+<div class="row">
+	<p>Who's That Actor?
+	<br>6.869 Final Project  --  Fall 2015  --  ibelson eanntuan jenshen</p>
+</div>
+
+
+</div>
+</div>
+
+   
+
+    <!-- Load javascript at end so page loads faster -->
+    
+    <script src="ext/jquery-2.1.0.js"></script>
+    <script src="ext/main.js"></script>
+    <script src="ext/video-js-5.3.0/video.js"></script>
+	<script src="ext/VideoFrame.min.js"></script>
+	<script src="ext/thumbnail-slider/jquery.flexslider-min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
 </body>
 </html>
 
