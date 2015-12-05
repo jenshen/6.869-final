@@ -10,6 +10,8 @@ $(document).ready(function() {
         }
     });
 
+    setup();
+
     video.video.addEventListener('play', function() { 
         video.listen('frame');
         $('#id_faces').hide();
@@ -21,41 +23,44 @@ $(document).ready(function() {
         $('#id_faces').show();
     });
 
-    loadVideoThumbnails(TRAILERS);
-
     $('.flexslider').flexslider({
         animation: "slide",
         animationLoop: false,
-        itemWidth: 160,
+        itemWidth: 120,
         itemMargin: 5,
         pausePlay: false,
     });
 
     $('#id_faces').click(function() {
-        console.log('hello');
         var frameNum = video.get();
         $('#clickedFrame').html('Frame sent: '+frameNum);
         // MAKE MATLAB CALL HERE - send frame, images
         // RECEIVE BBOXES FROM MATLAB
 
-        console.log('draw box');
         ctx.clearRect(0,0,canvas.width,canvas.height);
         $.each(BBOXES, function(i, b) {
             drawBbox(b, ctx);
         });
     });
 
-    $('.trailer_thumb').click(loadVideo);
+    $('.trailer_thumb').click(loadVideo);   
 });
 
 // FUNCTIONS
-var loadVideoThumbnails = function(trailers) {    
-    $.each(trailers, function(i, trailer) {
-      $(".slides").append('<li class="trailer_thumb" id="'+i+'"><img src="'+trailer.image+'" /></li>');
-    });
-};
+var setup = function() {
+    // Load video thumbnails
+    $.each(TRAILERS, function(i, trailer) {
+        if (i === 0) {
+            // First video is default
+            $('video source').attr('src', 'videos/' + trailer.file);
+            $("video")[0].load();
+        }
 
-var loadVideo = function() {
+        $(".slides").append('<li class="trailer_thumb" id="'+i+'"><img src="videos/'+trailer.image+'" /></li>');
+    });
+}
+
+var loadVideo = function(i) {
     var i = $(this).attr('id');
     var trailer = TRAILERS[i];
 
@@ -78,8 +83,12 @@ var Trailer = function(film, image, file) {
 };
 
 var TRAILERS = [
-    new Trailer("The Theory of Everything", "camouflauge.jpg", "theory.mp4"),
-    new Trailer("The Bourne Legacy", "camouflauge.jpg", "legacy.mp4"),
+    new Trailer("The Theory of Everything", "theory.jpg", "theory.mp4"),
+    new Trailer("Interstellar", "interstellar.jpg", "interstellar.mp4"),
+    new Trailer("The Theory of Everything", "theory.jpg", "theory.mp4"),
+    new Trailer("Interstellar", "interstellar.jpg", "interstellar.mp4"),
+    new Trailer("The Theory of Everything", "theory.jpg", "theory.mp4"),
+    new Trailer("Interstellar", "interstellar.jpg", "interstellar.mp4"),
 ];
 
 var BBOXES = [

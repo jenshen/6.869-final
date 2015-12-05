@@ -1,18 +1,10 @@
-html, body {
-	/*overflow: 'hidden';
-    height': 100%;*/
-}
-.main {
-	display: block;
-	width: 80%;
-	margin: 0 auto;
+html {
+  position: relative;
+  min-height: 100%;
 }
 
-.video-player {
-	display: block;
-	width: 100%;
-	/*height: 100%;*/
-	padding: 20px 0 50px; /* Account for video controls space */
+body {
+	background-color: #333;
 }
 
 video {
@@ -20,6 +12,37 @@ video {
     height: auto;
 }
 
+#canvas {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: -533px;
+}
+
+.main {
+	display: block;
+	width: 1200px;
+	height: 100%;
+	margin: 0 auto;
+}
+
+.video-player {
+	display: block;
+	position: relative;
+	width: 100%;
+	margin: 20px auto 50px; /* Account for video controls space */
+}
+
 .slider {
-	margin: 20px 0;
+	margin: 0 0 50px;
+}
+
+.footer {
+	width: 100%;
+	color: rgba(255,255,255,.5);
+	text-align: center;
+}
+
+.center {
+	margin: 0 auto;
 }
