@@ -27,10 +27,6 @@
 		<span id="clickedFrame" style="color:white">Frame sent: 0</span>
 	</div>
 
-	<div>
-		<button id="id_faces">ID</button>
-	</div>
-
     
 </div>
 
@@ -42,12 +38,24 @@
 
 	<!-- Video player, canvas -->
 	<div class="row">
-		<div class="video-player">
-			<canvas id="canvas" width="1066" height="600" style="z-index:5" ></canvas>
-			<video id="my-video" class="video-js center" width="1066" height="600" controls preload="auto" data-setup="{}">
+		<!-- ID button, actors list -->
+		<div class="col-md-2 sidepanel">
+			<div id="actorslist" class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title text-center">Actors in frame</h3>
+				</div>
+				<div class="panel-body text-center">
+				</div>
+			</div>
+			<input id="id-faces" class="btn btn-default center-block" type="button" value="ID Actors">
+		</div>
+		<div class="video-player col-md-8">
+			<canvas id="canvas" width="720" height="405" style="z-index:5" ></canvas>
+			<video id="my-video" class="video-js center" width="720" height="405" controls preload="auto" data-setup="{}">
 				<source src="http://www.w3schools.com/html/mov_bbb.mp4"></source>
 			</video> 
 		</div>
+		<div class="col-md-2"></div>
 	</div>
 
 	<!-- Video selector -->
@@ -61,10 +69,6 @@
 	<div class="footer">
 		<p>Who's That Actor?
 		<br>6.869 Final Project  --  Fall 2015  --  ibelson eanntuan jenshen</p>
-	</div>
-
-	<div>
-		<button id="id_faces">ID</button>
 	</div>
 
 </div>

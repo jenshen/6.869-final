@@ -17,6 +17,8 @@ $(document).ready(function() {
         $('#id_faces').hide();
         var canvas = document.getElementById('canvas');
         ctx.clearRect(0,0,canvas.width,canvas.height);
+        $("#actorslist .panel-body").html('');
+
     });
     video.video.addEventListener('pause', function() {
         video.stopListen();
@@ -26,22 +28,32 @@ $(document).ready(function() {
     $('.flexslider').flexslider({
         animation: "slide",
         animationLoop: false,
-        itemWidth: 120,
+        itemWidth: 100,
         itemMargin: 5,
         pausePlay: false,
     });
 
-    $('#id_faces').click(function() {
+    $('#id-faces').click(function() {
         var frameNum = video.get();
         $('#clickedFrame').html('Frame sent: '+frameNum);
+        $("#actorslist .panel-body").html('');
         // MAKE MATLAB CALL HERE - send frame, images
         // RECEIVE BBOXES FROM MATLAB
 
         ctx.clearRect(0,0,canvas.width,canvas.height);
+
+        if (BBOXES.length == 0) {
+            $("#actorslist .panel-body").html(MSG_NO_ACTORS);
+        }
+
         $.each(BBOXES, function(i, b) {
-            drawBbox(b, ctx);
+            var color = ACTOR_COLORS[i];
+            drawBbox(b, color, ctx);
+            $("#actorslist .panel-body").append('<p style="color: '+color+'">Actor Name</p>');
         });
     });
+
+    $("#actorslist .panel-body").html(MSG_NO_ACTORS);
 
     $('.trailer_thumb').click(loadVideo);   
 });
@@ -68,10 +80,10 @@ var loadVideo = function(i) {
     $("video")[0].load();
 };
 
-var drawBbox = function(bbox, ctx) {
+var drawBbox = function(bbox, color, ctx) {
     var width = bbox.x2 - bbox.x1;
     var height = bbox.y2 - bbox.y1;
-    ctx.strokeStyle = "red";
+    ctx.strokeStyle = color;
     ctx.strokeRect(bbox.x1, bbox.x2, width, height);
 };
 
@@ -97,4 +109,13 @@ var BBOXES = [
     {x1: 340, y1: 100, x2: 400, y2: 200}
 ];
 
+var MSG_NO_ACTORS = "No actors recognized.";
+
+var ACTOR_COLORS = [
+    "rgba(202, 45, 36, 1)", // dark gray blue
+    "rgba(168, 61, 70, 1)", // turquoise
+    "rgba(46, 68, 94, 1)", // yellow
+    "rgba(22, 72, 89, 1)", // orange
+    "rgba(7, 67, 87, 1)", // red
+];
 
