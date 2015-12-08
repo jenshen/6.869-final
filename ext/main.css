@@ -27,7 +27,13 @@ video {
 
 #actorslist {
 	width: 100%;
-	height: 350px;
+	height: 402px;
+	margin-bottom: 10px;
+	background-color: rgba(0,0,0,0);
+}
+
+#actorslist .panel-body {
+	color: white;
 }
 
 .main {
@@ -58,7 +64,7 @@ video {
 }
 
 .sidepanel {
-	left: 30px;
+	left: -30px;
 }
 
 .btn-actor {

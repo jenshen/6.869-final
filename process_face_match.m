@@ -4,11 +4,6 @@ function [ ] = process_face_match( path )
     data_film = fopen(filepath);
     data_film_framecount = str2num(fgets(data_film));
     data_film_actorcount = str2num(fgets(data_film));
-    data_film_actornames = {};
-    for i = 1: data_film_actorcount
-        actorname = fgets(data_film);
-        data_film_actornames{i} = actorname;
-    end
     fclose(data_film);
 
     NUM_IMAGES_PER_ACTOR = 20;
@@ -24,8 +19,6 @@ function [ ] = process_face_match( path )
     featureCount = 1;
     for i=1:size(faceDB,2)
         for j=1:faceDB(i).Count
-            %n = extractHOGFeatures(read(training(i),1));
-            %size(n)
             trainingFeatures(featureCount,:) = extractHOGFeatures(read(faceDB(i),1));
             trainingLabels{featureCount} = faceDB(i).Description;
             featureCount = featureCount + 1;
@@ -38,7 +31,7 @@ function [ ] = process_face_match( path )
     filepath = strcat(path, '/Data/data_bboxes.txt');
     data_bbox = fopen(filepath, 'w');
     fprintf(data_bbox, 'parseDataBboxes({');
-    for frame_num = 100: 200
+    for frame_num = 1: data_film_framecount
         [ cnt_actors, ims_actors, bboxes ] = process_stills(strcat(path, '/Video/Frames/frame_', int2str(frame_num), '.png'), IMAGE_SIZE);
         str_frame_num = int2str(frame_num);
         str_cnt_actors = int2str(cnt_actors);

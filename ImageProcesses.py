@@ -9,24 +9,32 @@ from imageDownloader import ImageDownloader
 import matlab.engine
 
 # scrapes for film data
-def get_film_data(title):	
+def get_film_data(title, frame_cnt):
 	url = "http://www.myapifilms.com/imdb?format=JSON&actors=F&"
-	url = url + "title=" + title
+	url = url + "title=" + title.replace("_", "%20")
+	path = "Film-" + title
 	response = requests.get(url)
 	if response.status_code == 200:
 		film_data = response.json()[0]
 		actor_range = min(len(film_data['actors']), 10)
 		actor_cnt = 0
+		actor_list = []
 		for i in xrange(actor_range):
 			try:
 				print film_data['actors'][i]['actorName']
 				img_urls = get_actor_imgs(film_data['actors'][i]['actorName'])
-				get_files_imgs(actor_cnt, img_urls, title)
+				get_files_imgs(actor_cnt, img_urls, path)
 				actor_cnt = actor_cnt + 1
+				actor_list.append(film_data['actors'][i]['actorName'])
 			except:
 				pass
-
-		run_matlab(title)
+		f1 = open("./" + path + "/Data/data_film.txt", 'w+')
+		f1.write(str(frame_cnt) + "\n" + str(actor_cnt))
+		f1.close()
+		f2 = open("./" + path + "/Data/data_actors.txt", 'w+')
+		f2.write("parseDataActors({\n\"actors\":" + str(actor_list) + "\n" + ")};");
+		f2.close()
+		run_matlab(path)
 	else:
 		print "Error: IMDB Access"
 
@@ -55,15 +63,12 @@ def get_files_imgs(actor_index, img_urls, path):
 # runs matlab function
 def run_matlab(path):
 	eng = matlab.engine.start_matlab()
-	#eng.process_face_match(nargout=0)
 	eng.process_face_match(path, nargout=0)
-	#print(match_id)
 
-###### Write output file with film data
 
-# make sure to have folders named 'Trailer-Interstellar_Face_DB' and 'Trailer-Interstellar_Face_DB_Final'
-if len(sys.argv) <= 1:
-	print "Error: Require film title"
+# Call with args: film_title frame_count
+if len(sys.argv) < 3:
+	print "Error: Require film title and frame count"
 else:
-	get_film_data(sys.argv[1])
+	get_film_data(sys.argv[1], sys.argv[2])
 
